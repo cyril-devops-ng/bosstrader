@@ -1,6 +1,6 @@
 <?php
     $db_host = 'localhost';
-    $db_user = 'root';
-    $db_pass = '';
-    $db_name = 'boss_trader';
+    $db_user = 'bosstrad_admin';
+    $db_pass = 'passw0rd%%';
+    $db_name = 'bosstrad_bosstrader';
 ?>

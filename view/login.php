@@ -36,6 +36,12 @@
             <div class="dev-page-login-block">
                 <a class="dev-page-login-block__logo">Boss Trader</a>
                 <div class="dev-page-login-block__form">
+                    <?php if($_SESSION['login_failed'] == 1 ): ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                         Invalid logon details.
+                    </div>
+                    <?php unset($_SESSION['login_failed']);endif; ?>
                     <div class="title"><strong>Welcome</strong>, please login</div>
                     <form action="login" method="post">                        
                         <div class="form-group">
@@ -53,22 +59,23 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                <input type="text" class="form-control" placeholder="Company Id" name='company_id' required>
+                                <input type="text" class="form-control" placeholder="Company Code" name='company_id' required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                 <select name="login_type" class="form-control dropdown-dark" >
-                                       <option class="form-control">Boss</option>
-                                        <option class="form-control">Sales Person</option>
+                                    <option value="Boss">Boss</option>
+                                    <option value="Sales Person">Sales Person</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group no-border margin-top-20">
                             <button class="btn btn-success btn-block">Login</button>
                         </div>
-                        <p><a href="#">Forgot Password?</a> | <a href="register">Activate Business</a></p>                        
+                        <p><a href="forgotpassword">Forgot Password?</a> | <a href="register">Activate Business</a>
+                            | <a href="referral">Become a Referral</a> | <a href="documentation">Documentation</a>  </p>                     
                     </form>
                 </div>
                 <div class="dev-page-login-block__footer">

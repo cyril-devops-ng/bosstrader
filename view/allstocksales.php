@@ -5,7 +5,7 @@
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>        
         <!-- meta section -->
-        <title>Boss Trader - </title>
+        <title>Boss Trader - All Stock</title>
         
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
         <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -24,6 +24,8 @@
         
         <!-- javascripts -->
         <script type="text/javascript" src="js/plugins/modernizr/modernizr.js"></script>
+        <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="script/js.js"></script>
         <!-- ./javascripts -->     
         
         <style>.dev-page{visibility: hidden;}</style>
@@ -40,7 +42,7 @@
             <div class="dev-page-header">
                 
                 <div class="dph-logo">
-                    <a href="index-2.html">Intuitive</a>
+                    <a href="homesales">Intuitive</a>
                     <a class="dev-page-sidebar-collapse">
                         <div class="dev-page-sidebar-collapse-icon">
                             <span class="line-one"></span>
@@ -49,25 +51,15 @@
                         </div>
                     </a>
                 </div>
-
-                <ul class="dph-buttons pull-right">                    
-                    <li class="dph-button-stuck">
-                        <a href="#" class="dev-page-search-toggle">
-                            <div class="dev-page-search-toggle-icon">
-                                <span class="circle"></span>
-                                <span class="line"></span>
-                            </div>
-                        </a>
-                    </li>                    
-                    <li class="dph-button-stuck">
-                        <a href="#" class="dev-page-rightbar-toggle">
-                            <div class="dev-page-rightbar-toggle-icon">
-                                <span class="line-one"></span>
-                                <span class="line-two"></span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>                                                
+                <?php 
+                    $companyProfile = $_SESSION['company']; 
+                    $name = $companyProfile[0]['boss_user'];
+                    $companyname = strtoupper( $companyProfile[0]['company_name'] );
+                    $name = ucfirst($name);
+                ?>
+                
+                <span style="margin-left: 250px;"><h1><?= $companyname;?></h1></span>
+                                                               
                 
             </div>
             <!-- ./page header -->
@@ -80,45 +72,25 @@
                     
                     <div class="profile profile-transparent">
                         <div class="profile-image">
-                            <img src="assets/images/users/user_1.jpg">
+                            <img src="assets/images/users/<?= $_SESSION['company'][0]['company_id']?>_user_2.jpg">
                             <div class="profile-badges">
-                                <!--<a href="#" class="profile-badges-left"><i class="fa fa-trophy"></i> 243</a>
-                                <a href="#" class="profile-badges-right"><i class="fa fa-users"></i> 1,971</a>-->
+                                <a href="editprofilesales" id="uploadPic" class="profile-badges-right"><i class="fa fa-camera"></i></a>
                             </div>
                             <div class="profile-status online"></div>
                         </div>
                         <div class="profile-info">
-                            <h4>Sales</h4>
+                             <?php 
+                                $companyProfile = $_SESSION['company']; 
+                                $name = $companyProfile[0]['sales_user'];
+                                $name = ucfirst($name);
+                            ?>
+                            <h4><?= $name ?></h4>
                             <span>Sales Person</span>
                         </div>                        
                     </div>
                     
                     <ul class="dev-page-navigation">
-                        <li class="title">Navigation</li>
-                        <li class="active">
-                            <a href="homesales"><i class="fa fa-desktop"></i> <span>Dashboard</span></a>
-                        </li>                        
-                        <li>
-                            <a href="#"><i class="fa fa-file-o"></i> <span>Stock Upload</span></a>
-                            <ul>
-                                <li>
-                                    <a href="massuploadsales">Mass Stock Upload</a>
-                                </li>
-                            </ul>
-                        </li>  
-                        <li>
-                            <a href="addstocksales"><i class="fa fa-file-o"></i> <span>Add stock</span></a>
-                            
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-cube"></i> <span>Stock List</span> </a>
-                            <ul>                                
-                                <li><a href="allstocksales">All Stock</a></li>
-                            </ul>
-                        </li>  
-                        <li>
-                            <a href="makesales"><i class="fa fa-dot-circle-o"></i> <span>Make Sales</span> </a>
-                        </li>
+                        <?php require_once 'menusales.php'; ?>
                    </ul>  
                 </div>
                 <!-- ./page sidebar -->
@@ -156,6 +128,7 @@
                                             <th>Quantity</th>
                                             <th>Selling Price</th>
                                             <th>Last Updated date</th>
+                                            
                                         </tr>
                                     </thead>                               
                                     <tbody>
@@ -166,7 +139,7 @@
                                                 echo '<tr>';
                                                 echo '<td>'.$value['stock_name'].'</td>';
                                                 echo '<td>'.$value['quantity'].'</td>';
-                                                echo '<td>'.$value['sell_price'].'</td>';
+                                                echo '<td>'.number_format ( $value['sell_price'] ) .'</td>';
                                                 echo '<td>'.$value['date'].'</td>';
                                                 echo '</tr>';
                                             }

@@ -36,11 +36,20 @@
         <!-- ./set loading layer -->
         
         <!-- page wrapper -->
-        <div class="dev-page">
+        <div class="dev-page dev-page-sidebar-collapsed">
             
             <!-- page header -->    
             <div class="dev-page-header">
-                
+                <div class="dph-logo">
+                    <a href="home">Boss Trader</a>
+                    <a class="dev-page-sidebar-collapse">
+                        <div class="dev-page-sidebar-collapse-icon">
+                            <span class="line-one"></span>
+                            <span class="line-two"></span>
+                            <span class="line-three"></span>
+                        </div>
+                    </a>
+                </div>
                 <ul class="dph-buttons pull-right">                    
                     <li class="dph-button-stuck">
                         <a href="#" class="dev-page-search-toggle">
@@ -67,7 +76,14 @@
             <div class="dev-page-container">
 
                 <!-- page sidebar -->
-                
+                <div class="dev-page-sidebar">                    
+                    
+                   
+                    
+                    <ul class="dev-page-navigation">
+                        <?php require_once 'registermenu.php'; ?>
+                   </ul>    
+                </div>
                 <!-- ./page sidebar -->
                 
                 <!-- page content -->
@@ -78,7 +94,7 @@
                         <!-- page title -->
                         <div class="page-title">
                             <h1>Register Business</h1>
-                            <p>Individual form controls automatically receive some global styling</p>
+                            <p>Kindly follow the steps below to activate business</p>
                             
                             <ul class="breadcrumb">
                                 <li><a href="home">BossTrader</a></li>
@@ -96,7 +112,31 @@
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                     <strong>Congratulations!</strong> Your company has been successfully registered! Check your email for further details!.
                                 </div>
-                           <?php endif; unset($_SESSION['newcompany']);?>
+                           <?php  unset($_SESSION['newcompany']);endif;?>
+                            <?php if ( isset( $_SESSION['newcompany']) &&  $_SESSION['newcompany'] == 0 ): ?>
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    Registration failed! Invalid token entered
+                                </div>
+                           <?php  unset($_SESSION['newcompany']); endif;?>
+                            <?php if ( isset( $_SESSION['bosspassword']) &&  $_SESSION['bosspassword'] == 1 ): ?>
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    Registration failed! Boss Password do not match!
+                                </div>
+                           <?php unset($_SESSION['bosspassword']); endif;?>
+                            <?php if ( isset( $_SESSION['salespassword']) &&  $_SESSION['salespassword'] == 1 ): ?>
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    Registration failed! Sales person password do not match!
+                                </div>
+                           <?php  unset($_SESSION['salespassword']); endif;?>
+                            <?php if ( isset( $_SESSION['company_exist']) &&  $_SESSION['company_exist'] == 1 ): ?>
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    Company Name has already been registered.
+                                </div>
+                           <?php  unset($_SESSION['company_exist']); endif;?>
                             <div class="page-subtitle">
                                 <h3>Business Activation</h3>
                                 <p>One time activity</p>
@@ -108,13 +148,13 @@
                                         <li>
                                             <a href="#step-1">
                                                 <span class="stepNumber">1</span>
-                                                <span class="stepDesc">Login<br /><small>Information</small></span>
+                                                <span class="stepDesc">Step 1: Login<br /><small>Information</small></span>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#step-2">
                                                 <span class="stepNumber">2</span>
-                                                <span class="stepDesc">Company<br /><small>Personal data</small></span>
+                                                <span class="stepDesc">Step 2: Company<br /><small>Personal data</small></span>
                                             </a>
                                         </li>                                    
                                     </ul>
@@ -130,13 +170,13 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">Password</label>
                                             <div class="col-md-8">
-                                                <input type="password" class="form-control" name="bossPasswordReg" placeholder="Password" id="password" required/>
+                                                <input type="password" class="form-control" name="bossPasswordReg" placeholder="Password" id="boss_password" required/>
                                             </div>
                                         </div>             
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">Re-Password</label>
                                             <div class="col-md-8">
-                                                <input type="password" class="form-control" name="bossRepasswordReg" placeholder="Re-Password" required/>
+                                                <input  type="password" class="form-control" name="bossRepasswordReg" placeholder="Re-Password" id="boss_repassword"required/>
                                             </div>
                                         </div>
                                         
@@ -149,13 +189,13 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">Password</label>
                                             <div class="col-md-8">
-                                                <input type="password" class="form-control" name="salesPasswordReg" placeholder="Password" id="password" required/>
+                                                <input type="password" class="form-control" name="salesPasswordReg" placeholder="Password" id="sales_password" required/>
                                             </div>
                                         </div>             
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">Re-Password</label>
                                             <div class="col-md-8">
-                                                <input type="password" class="form-control" name="salesRepasswordReg" placeholder="Re-Password" required/>
+                                                <input type="password" class="form-control" name="salesRepasswordReg" placeholder="Re-Password"id="sales_repassword" required/>
                                             </div>
                                         </div>
 
@@ -172,13 +212,13 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">E-mail</label>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control" name="companyEmailAddress" placeholder="Your email" required/>
+                                                <input id="companyEmailAddress" type="text" class="form-control" name="companyEmailAddress" placeholder="Your email" required/>
                                             </div>
                                         </div>                                    
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">Phone number: </label>
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control" name="companyPhoneNumber" placeholder="Your phone number" required/>
+                                                <input id="companyPhoneNumber" type="text" class="form-control" name="companyPhoneNumber" placeholder="Your phone number" required/>
                                             </div>                                        
                                         </div>          
                                         <div class="form-group">
@@ -190,7 +230,7 @@
                                         <div class="form-group">
                                             <label class="col-md-2 control-label">Token: </label>
                                             <div class="col-md-8">
-                                                <input id="tokenField" type="text" class="form-control" name="token" placeholder="Token here" required/>
+                                                <input id="tokenField" type="text" class="form-control" name="tokenReg" placeholder="Token here" required/>
                                                 <br/><button id="genTokenBtn" type="button" class="btn btn-default">Generate Token</button>
                                             </div>                                        
                                         </div> 

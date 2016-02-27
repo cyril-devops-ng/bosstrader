@@ -4,12 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/projects/bosstrader/controller/controller.ctrl.php</file>
-            <file>file:/C:/xampp/htdocs/projects/bosstrader/view/login.php</file>
-            <file>file:/C:/xampp/htdocs/projects/bosstrader/script/js.js</file>
-            <file>file:/C:/xampp/htdocs/projects/bosstrader/view/register.php</file>
-            <file>file:/C:/xampp/htdocs/projects/bosstrader/view/allstocksales.php</file>
-            <file>file:/C:/xampp/htdocs/projects/bosstrader/index.php</file>
-            <file>file:/C:/xampp/htdocs/projects/bosstrader/view/makesales.php</file>
+            <file>file:/C:/xampp/htdocs/projects/bosstrader/view/payportal.php</file>
+            <file>file:/C:/xampp/htdocs/projects/bosstrader/view/sales.php</file>
+            <file>file:/C:/xampp/htdocs/projects/bosstrader/view/massupload.php</file>
+            <file>file:/C:/xampp/htdocs/projects/bosstrader/view/editprofilesales.php</file>
+            <file>file:/C:/xampp/htdocs/projects/bosstrader/view/massuploadsales.php</file>
         </group>
     </open-files>
 </project-private>

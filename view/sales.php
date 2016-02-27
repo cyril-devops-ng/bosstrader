@@ -49,25 +49,15 @@
                         </div>
                     </a>
                 </div>
-
-                <ul class="dph-buttons pull-right">                    
-                    <li class="dph-button-stuck">
-                        <a href="#" class="dev-page-search-toggle">
-                            <div class="dev-page-search-toggle-icon">
-                                <span class="circle"></span>
-                                <span class="line"></span>
-                            </div>
-                        </a>
-                    </li>                    
-                    <li class="dph-button-stuck">
-                        <a href="#" class="dev-page-rightbar-toggle">
-                            <div class="dev-page-rightbar-toggle-icon">
-                                <span class="line-one"></span>
-                                <span class="line-two"></span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>                                                
+                <?php 
+                    $companyProfile = $_SESSION['company']; 
+                    $name = $companyProfile[0]['boss_user'];
+                    $companyname = strtoupper( $companyProfile[0]['company_name'] );
+                    $name = ucfirst($name);
+                ?>
+                
+                <span style="margin-left: 250px;"><h1><?= $companyname;?></h1></span>
+                                                               
                 
             </div>
             <!-- ./page header -->
@@ -80,45 +70,25 @@
                     
                     <div class="profile profile-transparent">
                         <div class="profile-image">
-                            <img src="assets/images/users/user_1.jpg">
+                            <img src="assets/images/users/<?= $_SESSION['company'][0]['company_id']?>_user_1.jpg">
                             <div class="profile-badges">
-                                <!--<a href="#" class="profile-badges-left"><i class="fa fa-trophy"></i> 243</a>
-                                <a href="#" class="profile-badges-right"><i class="fa fa-users"></i> 1,971</a>-->
+                                <a href="editprofile" id="uploadPic" class="profile-badges-right"><i class="fa fa-camera"></i></a>
                             </div>
                             <div class="profile-status online"></div>
                         </div>
                         <div class="profile-info">
-                            <h4>Boss</h4>
+                             <?php 
+                                $companyProfile = $_SESSION['company']; 
+                                $name = $companyProfile[0]['boss_user'];
+                                $name = ucfirst($name);
+                            ?>
+                            <h4><?= $name ?></h4>
                             <span>Owner of Business</span>
                         </div>                        
                     </div>
                     
                     <ul class="dev-page-navigation">
-                        <li class="title">Navigation</li>
-                        <li class="active">
-                            <a href="home"><i class="fa fa-desktop"></i> <span>Dashboard</span></a>
-                        </li>                        
-                        <li>
-                            <a href="#"><i class="fa fa-file-o"></i> <span>Stock Upload</span></a>
-                            <ul>
-                                <li>
-                                    <a href="massupload">Mass Stock Upload</a>
-                                </li>
-                            </ul>
-                        </li>  
-                        <li>
-                            <a href="addstock"><i class="fa fa-file-o"></i> <span>Add stock</span></a>
-                            
-                        </li>    
-                        <li>
-                            <a href="#"><i class="fa fa-cube"></i> <span>Stock List</span></a>
-                            <ul>                                
-                                <li><a href="allstock">All Stock</a></li>
-                            </ul>
-                        </li>       
-                        <li>
-                            <a href="sales"><i class="fa fa-dot-circle-o"></i> <span>Sales</span> </a>
-                        </li>
+                        <?php require_once 'menu.php'; ?>
                    </ul>    
                 </div>
                 <!-- ./page sidebar -->
@@ -131,7 +101,7 @@
                         <!-- page title -->
                         <div class="page-title">
                             <h1>Sales</h1>
-                            <br/><p>List of all sales on </p><button class="btn btn-default btn-rounded btn-icon"><i class="fa fa-calendar pull-left"></i><?php echo date("Y-m-d H:i:s")?></button>
+                            <br/>
                             
                             <ul class="breadcrumb">
                                 <li><a href="home">Home</a></li>
@@ -148,6 +118,7 @@
                                 <p>This table shows the list of sales at a particular date.</p>
                             </div>
                             
+                            
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-sortable">
                                     <thead>
@@ -158,7 +129,7 @@
                                             <th>Unit Selling Price</th>
                                             <th>Total Selling Price</th>
                                             <th>Profit</th>
-                                            <th>Last Updated date</th>
+                                            <th>Sales date</th>
                                         </tr>
                                     </thead>                               
                                     <tbody>
@@ -166,13 +137,14 @@
                                             $sales = $_SESSION['sales'];
 //                                            print '<pre>';print_r($stocks);print'</pre>';
                                             foreach ($sales as $key=>$value) {
+                                                $profit = $value['total_price'] - ( $value['quantity'] * $value['cost_price']);
                                                 echo '<tr>';
                                                 echo '<td>'.$value['stock_name'].'</td>';
-                                                echo '<td>'.$value['quantity'].'</td>';
-                                                echo '<td>'.$value['cost_price'].'</td>';
-                                                echo '<td>'.$value['unit_price'].'</td>';
-                                                echo '<td>'.$value['total_price'].'</td>';
-                                                echo '<td>'. $value['total_price']  .'</td>';
+                                                echo '<td>'.number_format ( $value['quantity'] ).'</td>';
+                                                echo '<td>'.number_format ($value['cost_price']).'</td>';
+                                                echo '<td>'.number_format ($value['unit_price']).'</td>';
+                                                echo '<td>'.number_format ($value['total_price']).'</td>';
+                                                echo '<td>'. number_format ($profit ) .'</td>';
                                                 echo '<td>'.$value['salesDate'].'</td>';
                                                 echo '</tr>';
                                             }
